@@ -1,0 +1,38 @@
+Todo:
+Create main page with either create new game or join game
+Use a unique id for games
+- Check if the id is already in use or not. Could use a unique 4 digit number and keep a set of ongoing games on the server
+
+Allow users to choose a name
+Allow users to place their pieces
+
+Create the board (adjacency array)
+Use numbers for the ships ie (1, 2, 3, 4, 5)
+0: nothing
+Number > 0: ship
+m: miss
+x: hit
+?: unique weapon
+[[], 
+[],
+[], 
+[], 
+[], 
+[], 
+[], 
+[], 
+[], 
+[]]
+
+Create a class with the players board as well as their name
+Could also use an id in the class
+
+Teams?
+
+Ideas: Add additional features like:
+- Radar scan
+- Different types of weapons
+- Big bomb which is 3 wide
+- Smaller bomb which is 2 wide
+- I like the idea of a question mark to get unique weapons
+    - Have to ensure that the question marks don't land on a ship ie get a weapon and hit a ship at the same time is not ideal
