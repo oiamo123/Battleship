@@ -1,34 +1,31 @@
-import JoinGame from "../components/JoinGame.js";
-import CreateGame from "../components/CreateGame.js";
+import LobbyManager from "../components/LobbyManager.js";
 
 class App {
   constructor() {
     this.main = document.querySelector(`main`);
     this.back = document.querySelector(`.back`);
-    this.initApp();
+    this.insertHTML();
+    this.pages = [];
   }
 
   addEventListeners() {
     const joinGame = document.querySelector(`.join-game`);
     const createGame = document.querySelector(`.create-game`);
 
-    joinGame.addEventListener(`click`, () => new JoinGame(this));
-    createGame.addEventListener(`click`, () => new CreateGame(this));
+    joinGame.addEventListener(`click`, () => this.startLobbyManager(true));
+
+    createGame.addEventListener(`click`, () => this.startLobbyManager(false));
+
     this.back.addEventListener(`click`, () => {
-      this.back.classList.add("hidden");
-      this.initApp();
+      const page = this.pages.pop();
+      if (page instanceof App) {
+        this.back.classList.add("hidden");
+      }
+      page.insertHTML();
     });
   }
 
-  startGame() {
-    // once the player starts the game, update the player screen as well as all the other players screens
-  }
-
-  endGame() {
-    // close the connection and return all players to the main screen
-  }
-
-  initApp() {
+  insertHTML() {
     this.main.innerHTML = "";
     this.main.insertAdjacentHTML(
       "afterbegin",
@@ -48,8 +45,11 @@ class App {
 
     this.addEventListeners();
   }
+
+  startLobbyManager(joiningGame) {
+    this.pages.push(this);
+    new LobbyManager(this, joiningGame);
+  }
 }
 
 new App();
-
-export default App;
